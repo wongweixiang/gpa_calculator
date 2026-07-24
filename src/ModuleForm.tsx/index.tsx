@@ -39,8 +39,11 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
       (semester) => semester.value === semesterId,
     );
 
+
     setSemesters((prevSemesters: Semester[]) => {
-      if (selectedSemester) {
+      const isExistingSem = prevSemesters.find((sem) => sem.semester.value === semesterId)
+
+      if (isExistingSem) {
         return prevSemesters.map((sem) =>
           sem.semester.value === semesterId
             ? {
