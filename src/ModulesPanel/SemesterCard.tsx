@@ -12,7 +12,7 @@ export const SemesterCard: React.FC<SemesterCardType> = ({ semesterData }) => {
   } = semesterData;
 
   return (
-    <div className="card-container">
+    <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md max-lg:p-6">
       <div>{label}</div>
       {modules.map((module) => (
         <ModuleCard
