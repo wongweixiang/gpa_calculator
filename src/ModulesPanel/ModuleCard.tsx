@@ -1,8 +1,7 @@
-import "./App.css";
 import { X } from "lucide-react";
-import { gradeColorMapping } from "./helpers/gradeMapping";
-import { cn } from "./lib/utils";
-import type { Module } from "./App";
+import { gradeColorMapping } from "../helpers/gradeMapping";
+import { cn } from "../lib/utils";
+import type { Module } from "../App";
 
 export const ModuleCard = ({
   module,

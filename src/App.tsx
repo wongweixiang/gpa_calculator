@@ -1,8 +1,9 @@
 import "./App.css";
 import { ModuleForm } from "./ModuleForm.tsx";
-import { ModuleCard } from "./ModuleCard";
+
 import { GpaPanel } from "./GpaPanel";
 import { useLocalStorage } from "./useLocalStorage.ts";
+import { ModulesPanel } from "./ModulesPanel/index.tsx";
 
 export type Module = {
   id: string;
@@ -42,6 +43,7 @@ function App() {
             ))
           )}
         </div> */}
+        <ModulesPanel semesters={semesters} />
       </div>
     </>
   );
