@@ -15,17 +15,19 @@ const moduleItems = moduleData.map((module) => ({
 }));
 
 type ModuleSelectProps = {
-  value: string;
-  onValueChange: (value: string) => void;
+  value: string | null;
+  onValueChange: (value: string | null) => void;
+  className?: string;
 };
 
 export const ModuleSelect: React.FC<ModuleSelectProps> = ({
   value,
   onValueChange,
+  className,
 }) => {
   return (
     <Select items={moduleItems} value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-full max-w-84">
+      <SelectTrigger className={className}>
         <SelectValue placeholder="Select a module" />
       </SelectTrigger>
       <SelectContent>

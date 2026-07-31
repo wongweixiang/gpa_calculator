@@ -6,6 +6,8 @@ export const GpaPanel: React.FC<{
 }> = ({ semesters }) => {
   const allModules = semesters.flatMap((semester) => semester.modules);
 
+  console.log(semesters, allModules);
+
   const { totalGradePoints, totalCredits } = allModules.reduce(
     (acc, module) => {
       const { totalGradePoints, totalCredits } = acc;

@@ -4,12 +4,13 @@ import { ModuleForm } from "./ModuleForm.tsx";
 import { GpaPanel } from "./GpaPanel";
 import { useLocalStorage } from "./useLocalStorage.ts";
 import { ModulesPanel } from "./ModulesPanel/index.tsx";
+import { gradeMapping } from "./helpers/gradeMapping";
 
 export type Module = {
   id: string;
   name: string;
   credits: number;
-  grade: string;
+  grade: keyof typeof gradeMapping;
 };
 
 export type Semester = {
@@ -18,8 +19,7 @@ export type Semester = {
 };
 
 function App() {
-  const [semesters, setSemesters] = useLocalStorage("modules", []);
-  console.log(semesters);
+  const [semesters, setSemesters] = useLocalStorage<Semester[]>("modules", []);
 
   return (
     <>
@@ -27,23 +27,7 @@ function App() {
         <h1>Module GPA Calculator</h1>
         <ModuleForm semesters={semesters} setSemesters={setSemesters} />
         <GpaPanel semesters={semesters} />
-        {/* <div className="card-container">
-          {modules.length === 0 ? (
-            <h3 className="h-32 text-muted-foreground text-2xl flex items-center justify-center">
-              Add some modules to get started!
-            </h3>
-          ) : (
-            modules.map((module) => (
-              <ModuleCard
-                module={module}
-                onRemove={() =>
-                  setModules(modules.filter((m) => m.id !== module.id))
-                }
-              />
-            ))
-          )}
-        </div> */}
-        <ModulesPanel semesters={semesters} />
+        <ModulesPanel semesters={semesters} setSemesters={setSemesters} />
       </div>
     </>
   );

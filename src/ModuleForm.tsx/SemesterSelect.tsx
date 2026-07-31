@@ -9,8 +9,8 @@ import {
 import { semesterItems } from "../helpers/semesterItems";
 
 type SemesterSelectProps = {
-  value: number;
-  onValueChange: (value: number) => void;
+  value: number | null;
+  onValueChange: (value: number | null) => void;
 };
 
 export const SemesterSelect: React.FC<SemesterSelectProps> = ({
@@ -19,7 +19,7 @@ export const SemesterSelect: React.FC<SemesterSelectProps> = ({
 }) => {
   return (
     <Select items={semesterItems} value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-32">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Select semester" />
       </SelectTrigger>
       <SelectContent>

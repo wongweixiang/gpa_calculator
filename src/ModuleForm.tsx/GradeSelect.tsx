@@ -14,8 +14,8 @@ const gradeItems = Object.keys(gradeMapping).map((grade) => ({
 }));
 
 type GradeSelectProps = {
-  value: string;
-  onValueChange: (value: string) => void;
+  value: string | null;
+  onValueChange: (value: string | null) => void;
 };
 
 export const GradeSelect: React.FC<GradeSelectProps> = ({
@@ -24,7 +24,7 @@ export const GradeSelect: React.FC<GradeSelectProps> = ({
 }) => {
   return (
     <Select items={gradeItems} value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-32">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Select grade" />
       </SelectTrigger>
       <SelectContent>

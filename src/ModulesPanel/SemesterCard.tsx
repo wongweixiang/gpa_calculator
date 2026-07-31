@@ -1,11 +1,17 @@
+// @ts-nocheck
+
 import { ModuleCard } from "./ModuleCard";
-import { type Semester } from "@/App";
+import { type Semester, type Module } from "@/App";
 
 type SemesterCardType = {
   semesterData: Semester;
+  setSemesters: (sems: Semester[]) => void;
 };
 
-export const SemesterCard: React.FC<SemesterCardType> = ({ semesterData }) => {
+export const SemesterCard: React.FC<SemesterCardType> = ({
+  semesterData,
+  setSemesters,
+}) => {
   const {
     semester: { label },
     modules,
@@ -14,15 +20,30 @@ export const SemesterCard: React.FC<SemesterCardType> = ({ semesterData }) => {
   return (
     <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md max-lg:p-6">
       <div>{label}</div>
-      {modules.map((module) => (
-        <ModuleCard
-          module={module}
-          onRemove={
-            () => {}
-            // setModules(modules.filter((m) => m.id !== module.id))
-          }
-        />
-      ))}
+      {modules.map((module) => {
+        console.log({ module });
+
+        return (
+          <ModuleCard
+            key={module.id}
+            module={module}
+            onRemove={() =>
+              setSemesters((prevSems: Semester[]) =>
+                prevSems.map((sem: Semester) => {
+                  const { semester, modules } = sem;
+
+                  return {
+                    semester,
+                    modules: modules.filter(
+                      (mod: Module) => mod.id !== module?.id,
+                    ),
+                  };
+                }),
+              )
+            }
+          />
+        );
+      })}
     </div>
   );
 };
