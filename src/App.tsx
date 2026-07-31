@@ -1,5 +1,6 @@
 import "./App.css";
 import { ModuleForm } from "./ModuleForm.tsx";
+import { Analytics } from "@vercel/analytics/react";
 
 import { GpaPanel } from "./GpaPanel";
 import { useLocalStorage } from "./useLocalStorage.ts";
@@ -28,6 +29,7 @@ function App() {
         <ModuleForm semesters={semesters} setSemesters={setSemesters} />
         <GpaPanel semesters={semesters} />
         <ModulesPanel semesters={semesters} setSemesters={setSemesters} />
+        <Analytics />
       </div>
     </>
   );
