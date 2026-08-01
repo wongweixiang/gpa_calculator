@@ -1,12 +1,10 @@
-// @ts-nocheck
-
 import { useState } from "react";
 import { GradeSelect } from "./GradeSelect";
-import { ModuleSelect } from "./ModuleSelect";
 import { moduleData } from "../helpers/moduleData";
 import type { Semester } from "../App";
 import { SemesterSelect } from "./SemesterSelect";
 import { semesterItems } from "@/helpers/semesterItems";
+import { ModuleSelectWithSearch } from "./ModuleSelectWithSearch";
 
 type ModuleFormProps = {
   semesters: Semester[];
@@ -69,10 +67,10 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
       onSubmit={handleSubmit}
       className="grid grid-cols-2 gap-4 border p-4 rounded-md shadow-md"
     >
-      <ModuleSelect
+      <ModuleSelectWithSearch
+        className="col-span-2 w-full"
         value={moduleId}
         onValueChange={setModuleId}
-        className="col-span-2 w-full"
       />
       <GradeSelect value={grade} onValueChange={setGrade} />
       <SemesterSelect value={semesterId} onValueChange={setSemesterId} />
