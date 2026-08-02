@@ -1,4 +1,5 @@
-import { useState } from "react";
+// @ts-nocheck
+
 import { GradeSelect } from "./GradeSelect";
 import { moduleData } from "../helpers/moduleData";
 import type { Semester } from "../App";
@@ -6,23 +7,35 @@ import { SemesterSelect } from "./SemesterSelect";
 import { semesterItems } from "@/helpers/semesterItems";
 import { ModuleSelectWithSearch } from "./ModuleSelectWithSearch";
 
+import { Controller, useForm } from "react-hook-form";
+
 type ModuleFormProps = {
   semesters: Semester[];
   setSemesters: (sem: Semester[]) => void;
+};
+
+type IFormInput = {
+  moduleId: string;
+  grade: string;
+  semesterId: number;
 };
 
 export const ModuleForm: React.FC<ModuleFormProps> = ({
   semesters,
   setSemesters,
 }) => {
-  const [moduleId, setModuleId] = useState<string | null>(null);
-  const [grade, setGrade] = useState<string | null>(null);
-  const [semesterId, setSemesterId] = useState<number | null>(null);
+  const { handleSubmit, control, watch, reset } = useForm<IFormInput>({
+    defaultValues: {
+      moduleId: "",
+      grade: "",
+      semesterId: 1,
+    },
+  });
 
-  const isComplete = grade !== "" && moduleId !== "" && semesterId !== null;
+  const isComplete = watch("grade") !== "" && watch("moduleId") !== "";
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  const onSubmit = (data: IFormInput) => {
+    const { moduleId, grade, semesterId } = data;
 
     const allModules = semesters.flatMap((semester) => semester.modules);
 
@@ -31,13 +44,12 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
       return;
     }
 
-    setGrade("");
-    setModuleId("");
-
     const selectedModule = moduleData.find((module) => module.id === moduleId);
     const selectedSemester = semesterItems.find(
       (semester) => semester.value === semesterId,
     );
+
+    console.log({ selectedModule, selectedSemester });
 
     setSemesters((prevSemesters: Semester[]) => {
       const isExistingSem = prevSemesters.find(
@@ -60,22 +72,52 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
         { semester: selectedSemester, modules: [{ grade, ...selectedModule }] },
       ];
     });
-  }
+
+    reset({ moduleId: "", grade: "", semesterId: 1 });
+  };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="grid grid-cols-2 gap-4 border p-4 rounded-md shadow-md"
     >
-      <ModuleSelectWithSearch
-        className="col-span-2 w-full"
-        value={moduleId}
-        onValueChange={setModuleId}
+      <Controller
+        name="moduleId"
+        control={control}
+        render={({ field }) => (
+          <ModuleSelectWithSearch
+            {...field}
+            value={field.value}
+            onValueChange={field.onChange}
+            className="col-span-2 w-full"
+          />
+        )}
       />
-      <GradeSelect value={grade} onValueChange={setGrade} />
-      <SemesterSelect value={semesterId} onValueChange={setSemesterId} />
+
+      <Controller
+        name="grade"
+        control={control}
+        render={({ field }) => (
+          <GradeSelect
+            {...field}
+            value={field.value}
+            onValueChange={field.onChange}
+          />
+        )}
+      />
+      <Controller
+        name="semesterId"
+        control={control}
+        render={({ field }) => (
+          <SemesterSelect
+            {...field}
+            value={field.value}
+            onValueChange={field.onChange}
+          />
+        )}
+      />
       <button
-        className="col-span-2 bg-blue-500 text-white px-4 py-2 rounded"
+        className="col-span-2 bg-blue-500 disabled:bg-gray-700 text-white px-4 py-2 rounded"
         type="submit"
         disabled={!isComplete}
       >

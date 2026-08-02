@@ -21,22 +21,18 @@ export const SemesterCard: React.FC<SemesterCardType> = ({
     <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md max-lg:p-6">
       <div>{label}</div>
       {modules.map((module) => {
-        console.log({ module });
-
         return (
           <ModuleCard
             key={module.id}
             module={module}
             onRemove={() =>
               setSemesters((prevSems: Semester[]) =>
-                prevSems.map((sem: Semester) => {
+                prevSems.map((sem) => {
                   const { semester, modules } = sem;
 
                   return {
                     semester,
-                    modules: modules.filter(
-                      (mod: Module) => mod.id !== module?.id,
-                    ),
+                    modules: modules.filter((mod) => mod.id !== module?.id),
                   };
                 }),
               )
