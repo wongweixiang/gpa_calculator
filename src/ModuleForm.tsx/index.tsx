@@ -49,8 +49,6 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
       (semester) => semester.value === semesterId,
     );
 
-    console.log({ selectedModule, selectedSemester });
-
     setSemesters((prevSemesters: Semester[]) => {
       const isExistingSem = prevSemesters.find(
         (sem) => sem.semester.value === semesterId,
@@ -87,7 +85,6 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
         render={({ field }) => (
           <ModuleSelectWithSearch
             {...field}
-            value={field.value}
             onValueChange={field.onChange}
             className="col-span-2 w-full"
           />
@@ -98,22 +95,14 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
         name="grade"
         control={control}
         render={({ field }) => (
-          <GradeSelect
-            {...field}
-            value={field.value}
-            onValueChange={field.onChange}
-          />
+          <GradeSelect {...field} onValueChange={field.onChange} />
         )}
       />
       <Controller
         name="semesterId"
         control={control}
         render={({ field }) => (
-          <SemesterSelect
-            {...field}
-            value={field.value}
-            onValueChange={field.onChange}
-          />
+          <SemesterSelect {...field} onValueChange={field.onChange} />
         )}
       />
       <button
