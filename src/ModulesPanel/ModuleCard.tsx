@@ -1,7 +1,7 @@
-import { X } from "lucide-react";
 import { gradeColorMapping } from "../helpers/gradeMapping";
 import { cn } from "../lib/utils";
 import type { Module } from "../App";
+import { RemoveModuleDialog } from "./RemoveModuleDialog";
 
 export const ModuleCard = ({
   module,
@@ -15,13 +15,7 @@ export const ModuleCard = ({
       key={module.id}
       className="relative flex items-center justify-between rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md max-lg:p-6"
     >
-      <button
-        onClick={onRemove}
-        className="absolute right-4 top-4 text-muted-foreground transition-colors hover:text-foreground"
-        aria-label="Remove module"
-      >
-        <X className="h-4 w-4" />
-      </button>
+      <RemoveModuleDialog module={module} onRemove={onRemove} />
 
       <div className="text-left pr-10">
         <h2 className="font-semibold leading-tight">
