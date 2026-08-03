@@ -1,12 +1,12 @@
 import { SemesterCard } from "./SemesterCard";
 import { type Semester } from "@/App";
 
-type ModulesPanelType = {
+type ModulesPanelProps = {
   semesters: Semester[];
   setSemesters: (sems: Semester[]) => void;
 };
 
-export const ModulesPanel: React.FC<ModulesPanelType> = ({
+export const ModulesPanel: React.FC<ModulesPanelProps> = ({
   semesters,
   setSemesters,
 }) => {

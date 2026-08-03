@@ -2,13 +2,16 @@ import { gradeColorMapping } from "../helpers/gradeMapping";
 import { cn } from "../lib/utils";
 import type { Module } from "../App";
 import { RemoveModuleDialog } from "./RemoveModuleDialog";
+import type React from "react";
 
-export const ModuleCard = ({
+type ModuleCardProps = {
+  module: Module
+  onRemove: () => void
+}
+
+export const ModuleCard: React.FC<ModuleCardProps> = ({
   module,
   onRemove,
-}: {
-  module: Module;
-  onRemove: () => void;
 }) => {
   return (
     <div

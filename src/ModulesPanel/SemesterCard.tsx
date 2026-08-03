@@ -1,14 +1,14 @@
 // @ts-nocheck
 
 import { ModuleCard } from "./ModuleCard";
-import { type Semester, type Module } from "@/App";
+import { type Semester } from "@/App";
 
-type SemesterCardType = {
+type SemesterCardProps = {
   semesterData: Semester;
   setSemesters: (sems: Semester[]) => void;
 };
 
-export const SemesterCard: React.FC<SemesterCardType> = ({
+export const SemesterCard: React.FC<SemesterCardProps> = ({
   semesterData,
   setSemesters,
 }) => {
