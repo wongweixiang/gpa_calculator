@@ -7,12 +7,7 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/components/ui/combobox";
-import { moduleData } from "../helpers/moduleData";
-
-const moduleItems = moduleData.map((module) => ({
-  label: `${module.id}: ${module.name}`,
-  value: module.id,
-}));
+import { useModuleItems } from "./useModuleItems";
 
 type ModuleSelectProps = {
   value: string | null;
@@ -25,6 +20,8 @@ export const ModuleSelectWithSearch: FC<ModuleSelectProps> = ({
   onValueChange,
   className,
 }) => {
+  const moduleItems = useModuleItems()
+
   return (
     <Combobox items={moduleItems} value={value} onValueChange={onValueChange}>
       <ComboboxInput placeholder="Select a module" className={className} />

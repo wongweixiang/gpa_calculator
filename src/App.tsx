@@ -21,8 +21,6 @@ export type Semester = {
 };
 
 function App() {
-
-
   const [semesters, setSemesters] = useLocalStorage<Semester[]>("modules", []);
 
   return (

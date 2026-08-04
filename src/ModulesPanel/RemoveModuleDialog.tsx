@@ -25,12 +25,14 @@ export const RemoveModuleDialog: React.FC<RemoveModuleDialogProps> = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <button
+        <Button
+          size='icon-xs'
+          variant='ghost'
           className="absolute right-4 top-4 text-muted-foreground transition-colors hover:text-foreground"
           aria-label="Remove module"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
