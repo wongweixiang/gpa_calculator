@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import { moduleData } from "../helpers/moduleData";
 import type { Semester } from "../App";
 import { semesterItems } from "@/helpers/semesterItems";
 
 import { useForm, } from "react-hook-form";
 import type { IFormInput } from ".";
+import { useModuleItems } from "./useModuleItems";
 
 type UseModuleFormProps = {
   semesters: Semester[];
@@ -22,6 +22,8 @@ export const useModuleForm = ({
     defaultValues
   });
 
+  const moduleItems = useModuleItems()
+
   const isComplete = watch("grade") !== "" && watch("moduleId") !== "";
 
   const onSubmit = (data: IFormInput) => {
@@ -34,7 +36,7 @@ export const useModuleForm = ({
       return;
     }
 
-    const selectedModule = moduleData.find((module) => module.id === moduleId);
+    const selectedModule = moduleItems.find((module) => module.id === moduleId);
     const selectedSemester = semesterItems.find(
       (semester) => semester.value === semesterId,
     );
