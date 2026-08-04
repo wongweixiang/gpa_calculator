@@ -1,9 +1,10 @@
-import { StrictMode } from "react";
+import { StrictMode, createContext } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./App.tsx";
-import { DiplomaChoice } from "./DiplomaChoice.tsx";
+import { DiplomaChoice, type Diploma } from "./DiplomaChoice.tsx";
+import { DiplomaContextProvider } from "./DiplomaContextProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +17,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+export const DiplomaContext = createContext({
+  diploma: {},
+  setDiploma: (dip: Diploma) => {},
+});
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <DiplomaContextProvider>
+      <RouterProvider router={router} />
+    </DiplomaContextProvider>
   </StrictMode>,
 );

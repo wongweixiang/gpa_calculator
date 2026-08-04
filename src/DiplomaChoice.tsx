@@ -5,10 +5,11 @@ import {
   LineChart,
   GitFork,
 } from "lucide-react";
-import { useLocalStorage } from "./useLocalStorage";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { DiplomaContext } from "./main";
 
-type Diploma = {
+export type Diploma = {
   id: string;
   name: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -43,7 +44,7 @@ export const DiplomaChoice = () => {
     },
   ];
 
-  const [diploma, setDiploma] = useLocalStorage("diploma", {});
+  const {setDiploma} = useContext(DiplomaContext);
 
   return (
     <div className="flex flex-col items-center justify-center gap-6 p-8">
