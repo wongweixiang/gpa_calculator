@@ -5,8 +5,8 @@ import {
   LineChart,
   GitFork,
 } from "lucide-react";
-import { Link } from "react-router";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router";
+import { useContext, useEffect } from "react";
 import { DiplomaContext } from "./main";
 
 export type Diploma = {
@@ -44,12 +44,18 @@ export const DiplomaChoice = () => {
     },
   ];
 
-  const {setDiploma} = useContext(DiplomaContext);
+  const {diploma, setDiploma} = useContext(DiplomaContext);
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (diploma?.id) navigate("/")
+  }, [])
 
   return (
     <div className="flex flex-col items-center justify-center gap-6 p-8">
       <h2 className="text-2xl font-bold">Select Your Diploma</h2>
-      <div className="grid grid-cols-2 grid-rows-3 gap-4">
+      <div className="flex flex-col md:grid md:grid-cols-2 md:grid-rows-3 gap-4">
         {diplomas.map((diploma) => {
           const Icon = diploma.icon;
           const isFullWidth = diploma.id === "CIP";
@@ -58,8 +64,8 @@ export const DiplomaChoice = () => {
               to="/"
               key={diploma.id}
               onClick={() => setDiploma(diploma)}
-              className={`flex w-48 cursor-pointer flex-col items-center gap-3 rounded-lg bg-blue-500 p-5 text-white transition-colors hover:bg-blue-600 ${
-                isFullWidth ? "col-span-2 w-auto flex-row justify-center" : ""
+              className={`flex w-56 cursor-pointer flex-col items-center gap-3 rounded-lg bg-blue-500 p-5 text-white transition-colors hover:bg-blue-600 ${
+                isFullWidth ? "md:col-span-2 md:w-auto md:flex-row md:justify-center" : ""
               }`}
             >
               <Icon className="h-8 w-8" strokeWidth={1.75} />
