@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
 import { DiplomaContext } from "./main";
+import { defaultDiploma } from "./DiplomaChoice/types";
 
 export const DiplomaPanel = () => {
   const { diploma, setDiploma } = useContext(DiplomaContext);
@@ -19,7 +20,7 @@ export const DiplomaPanel = () => {
       </p>
       <Link
         to={"/diploma-choice"}
-        onClick={() => setDiploma({})}
+        onClick={() => setDiploma(defaultDiploma)}
         className="text-center text-sm text-blue-500"
       >
         Reselect diploma

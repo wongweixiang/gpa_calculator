@@ -7,13 +7,8 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
-import { DiplomaContext } from "./main";
-
-export type Diploma = {
-  id: string;
-  name: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-};
+import { DiplomaContext } from "../main";
+import type { Diploma } from "./types";
 
 export const DiplomaChoice = () => {
   const diplomas: Diploma[] = [
@@ -57,7 +52,7 @@ export const DiplomaChoice = () => {
       <h2 className="text-2xl font-bold">Select Your Diploma</h2>
       <div className="flex flex-col md:grid md:grid-cols-2 md:grid-rows-3 gap-4">
         {diplomas.map((diploma) => {
-          const Icon = diploma.icon;
+          const Icon = diploma?.icon;
           const isFullWidth = diploma.id === "CIP";
           return (
             <Link

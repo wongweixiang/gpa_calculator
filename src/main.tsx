@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./App.tsx";
-import { DiplomaChoice, type Diploma } from "./DiplomaChoice.tsx";
+import { DiplomaChoice } from "./DiplomaChoice";
+import { type Diploma } from "./DiplomaChoice/types.ts";
 import { DiplomaContextProvider } from "./DiplomaContextProvider.tsx";
+import { defaultDiploma } from "./DiplomaChoice/types.ts";
 
 const router = createBrowserRouter([
   {
@@ -17,9 +19,14 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const DiplomaContext = createContext({
-  diploma: {},
-  setDiploma: (dip: Diploma) => {},
+type DiplomaContextValue = {
+  diploma: Diploma;
+  setDiploma: (dip: Diploma) => void;
+};
+
+export const DiplomaContext = createContext<DiplomaContextValue>({
+  diploma: defaultDiploma,
+  setDiploma: () => {},
 });
 
 createRoot(document.getElementById("root")!).render(
