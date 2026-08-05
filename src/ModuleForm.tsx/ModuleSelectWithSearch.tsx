@@ -20,7 +20,7 @@ export const ModuleSelectWithSearch: FC<ModuleSelectProps> = ({
   onValueChange,
   className,
 }) => {
-  const moduleItems = useModuleItems()
+  const { moduleItems } = useModuleItems()
 
   return (
     <Combobox items={moduleItems} value={value} onValueChange={onValueChange}>

@@ -21,7 +21,7 @@ export const ModuleSelect: React.FC<ModuleSelectProps> = ({
   onValueChange,
   className,
 }) => {
-  const moduleItems = useModuleItems()
+  const { moduleItems } = useModuleItems()
 
   return (
     <Select items={moduleItems} value={value} onValueChange={onValueChange}>

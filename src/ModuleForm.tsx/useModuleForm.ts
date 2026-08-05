@@ -22,7 +22,7 @@ export const useModuleForm = ({
     defaultValues
   });
 
-  const moduleItems = useModuleItems()
+  const { moduleList } = useModuleItems()
 
   const isComplete = watch("grade") !== "" && watch("moduleId") !== "";
 
@@ -36,7 +36,9 @@ export const useModuleForm = ({
       return;
     }
 
-    const selectedModule = moduleItems.find((module) => module.id === moduleId);
+    const selectedModule = moduleList.find((module) => module.id === moduleId);
+    console.log({selectedModule , moduleList})
+
     const selectedSemester = semesterItems.find(
       (semester) => semester.value === semesterId,
     );
