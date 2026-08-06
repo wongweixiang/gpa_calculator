@@ -8,14 +8,7 @@ import {
   dsfModules,
 } from "../helpers/moduleData";
 import { DiplomaContext } from "@/main";
-
-const diplomaIdMap = {
-  DIT: "1",
-  DSF: "5",
-  DAAA: "3",
-  DBFT: "8",
-  CIP: "9",
-};
+import { diplomaIdMap } from "@/helpers/diplomaIdMapping";
 
 export const useModuleItems = () => {
   const { diploma } = useContext(DiplomaContext);
