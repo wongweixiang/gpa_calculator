@@ -35,8 +35,8 @@ export const ModuleCard: React.FC<ModuleCardProps> = ({
 
       <div
         className={cn(
-          "shrink-0 text-4xl font-bold tabular-nums pr-2",
-          gradeColorMapping[module.grade],
+          "shrink-0 text-5xl font-bold tabular-nums pr-2",
+          gradeColorMapping[module.grade], module.grade === 'DIST' && "text-2xl"
         )}
       >
         {module.grade}

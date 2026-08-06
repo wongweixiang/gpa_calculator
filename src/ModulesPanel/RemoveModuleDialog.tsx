@@ -20,7 +20,7 @@ export const RemoveModuleDialog: React.FC<RemoveModuleDialogProps> = ({
   module,
   onRemove,
 }) => {
-  const { id } = module;
+  const { id, name } = module;
 
   return (
     <Dialog>
@@ -38,7 +38,7 @@ export const RemoveModuleDialog: React.FC<RemoveModuleDialogProps> = ({
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
           <DialogDescription>
-            This will remove <b>{id}</b> from the dataset
+            This will remove <b>{id}</b>: {name} from the dataset
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
