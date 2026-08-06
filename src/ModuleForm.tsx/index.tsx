@@ -1,20 +1,17 @@
-// @ts-nocheck
-
 import { GradeSelect } from "./GradeSelect";
-import { moduleData } from "../helpers/moduleData";
 import type { Semester } from "../App";
 import { SemesterSelect } from "./SemesterSelect";
-import { semesterItems } from "@/helpers/semesterItems";
 import { ModuleSelectWithSearch } from "./ModuleSelectWithSearch";
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
+import { useModuleForm } from "./useModuleForm";
 
 type ModuleFormProps = {
   semesters: Semester[];
   setSemesters: (sem: Semester[]) => void;
 };
 
-type IFormInput = {
+export type IFormInput = {
   moduleId: string;
   grade: string;
   semesterId: number;
@@ -24,59 +21,19 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({
   semesters,
   setSemesters,
 }) => {
-  const { handleSubmit, control, watch, reset } = useForm<IFormInput>({
+  const { control, isComplete, handleSubmit } = useModuleForm({
+    semesters,
+    setSemesters,
     defaultValues: {
       moduleId: "",
       grade: "",
       semesterId: 1,
-    },
-  });
-
-  const isComplete = watch("grade") !== "" && watch("moduleId") !== "";
-
-  const onSubmit = (data: IFormInput) => {
-    const { moduleId, grade, semesterId } = data;
-
-    const allModules = semesters.flatMap((semester) => semester.modules);
-
-    if (allModules.find((module) => module.id === moduleId)) {
-      alert("Module already added!");
-      return;
     }
-
-    const selectedModule = moduleData.find((module) => module.id === moduleId);
-    const selectedSemester = semesterItems.find(
-      (semester) => semester.value === semesterId,
-    );
-
-    setSemesters((prevSemesters: Semester[]) => {
-      const isExistingSem = prevSemesters.find(
-        (sem) => sem.semester.value === semesterId,
-      );
-
-      if (isExistingSem) {
-        return prevSemesters.map((sem) =>
-          sem.semester.value === semesterId
-            ? {
-                ...sem,
-                modules: [...sem.modules, { grade, ...selectedModule }],
-              }
-            : sem,
-        );
-      }
-
-      return [
-        ...prevSemesters,
-        { semester: selectedSemester, modules: [{ grade, ...selectedModule }] },
-      ];
-    });
-
-    reset({ moduleId: "", grade: "", semesterId: 1 });
-  };
+  });
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit}
       className="grid grid-cols-2 gap-4 border p-4 rounded-md shadow-md"
     >
       <Controller

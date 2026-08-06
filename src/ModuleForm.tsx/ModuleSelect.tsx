@@ -7,12 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { moduleData } from "../helpers/moduleData";
+import { useModuleItems } from "./useModuleItems";
 
-const moduleItems = moduleData.map((module) => ({
-  label: `${module.id}: ${module.name}`,
-  value: module.id,
-}));
 
 type ModuleSelectProps = {
   value: string | null;
@@ -25,6 +21,8 @@ export const ModuleSelect: React.FC<ModuleSelectProps> = ({
   onValueChange,
   className,
 }) => {
+  const { moduleItems } = useModuleItems()
+
   return (
     <Select items={moduleItems} value={value} onValueChange={onValueChange}>
       <SelectTrigger className={className}>
