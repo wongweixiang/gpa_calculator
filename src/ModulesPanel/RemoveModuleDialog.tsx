@@ -31,7 +31,7 @@ export const RemoveModuleDialog: React.FC<RemoveModuleDialogProps> = ({
           className="absolute right-4 top-4 text-muted-foreground transition-colors hover:text-foreground"
           aria-label="Remove module"
         >
-          <X className="h-5 w-5" />
+          <X className="size-5 md:size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>

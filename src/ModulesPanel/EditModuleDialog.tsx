@@ -38,10 +38,10 @@ export const EditModuleDialog: React.FC<EditModuleDialogProps> = ({
         <Button
           size='icon-xs'
           variant='ghost'
-          className="absolute right-8 top-4 text-muted-foreground transition-colors hover:text-foreground"
+          className="absolute right-12 top-4 text-muted-foreground transition-colors hover:text-foreground"
           aria-label="Edit module"
         >
-          <Edit className="h-4 w-4"/>
+          <Edit className="size-5 md:size-4"/>
         </Button>
       </DialogTrigger>
       <DialogContent>
