@@ -9,23 +9,37 @@ import {
 } from "../helpers/moduleData";
 import { DiplomaContext } from "@/main";
 
+const diplomaIdMap = {
+  DIT: "1",
+  DSF: "5",
+  DAAA: "3",
+  DBFT: "8",
+  CIP: "9",
+};
+
 export const useModuleItems = () => {
   const { diploma } = useContext(DiplomaContext);
 
-  let moduleList = commonModules;
+  let moduleList = commonModules.map((module) => ({
+    ...module,
+    id: module.id.replace(
+      "IT1x",
+      `IT1${diplomaIdMap[diploma?.id as keyof typeof diplomaIdMap]}`,
+    ),
+  }));
 
   switch (diploma?.id) {
     case "DIT":
-      moduleList = [...commonModules, ...ditModules];
+      moduleList = [...moduleList, ...ditModules];
       break;
     case "DSF":
-      moduleList = [...commonModules, ...dsfModules];
+      moduleList = [...moduleList, ...dsfModules];
       break;
     case "DAAA":
-      moduleList = [...commonModules, ...daaaModules];
+      moduleList = [...moduleList, ...daaaModules];
       break;
     case "DBFT":
-      moduleList = [...commonModules, ...dbftModules];
+      moduleList = [...moduleList, ...dbftModules];
       break;
   }
 
