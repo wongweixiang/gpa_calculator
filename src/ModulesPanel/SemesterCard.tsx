@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { ModuleCard } from "./ModuleCard";
-import { type Semester } from "@/App";
+import { type Module, type Semester } from "@/App";
 
 type SemesterCardProps = {
   semesterData: Semester;
@@ -25,6 +25,18 @@ export const SemesterCard: React.FC<SemesterCardProps> = ({
           <ModuleCard
             key={module.id}
             module={module}
+            onEdit={(newGrade: string) =>
+              setSemesters((prevSems: Semester[]) =>
+                prevSems.map((sem) => {
+                  const { semester, modules } = sem;
+
+                  return {
+                    semester,
+                    modules: modules.map((mod) => mod.id !== module?.id ? mod : { ...mod, grade: newGrade }),
+                  };
+                }),
+              )
+            }
             onRemove={() =>
               setSemesters((prevSems: Semester[]) =>
                 prevSems.map((sem) => {

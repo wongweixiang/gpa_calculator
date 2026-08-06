@@ -3,14 +3,17 @@ import { cn } from "../lib/utils";
 import type { Module } from "../App";
 import { RemoveModuleDialog } from "./RemoveModuleDialog";
 import type React from "react";
+import { EditModuleDialog } from "./EditModuleDialog";
 
 type ModuleCardProps = {
   module: Module
+  onEdit: (newGrade: string) => void
   onRemove: () => void
 }
 
 export const ModuleCard: React.FC<ModuleCardProps> = ({
   module,
+  onEdit,
   onRemove,
 }) => {
   return (
@@ -19,6 +22,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = ({
       className="relative flex items-center justify-between rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md max-lg:p-6"
     >
       <RemoveModuleDialog module={module} onRemove={onRemove} />
+      <EditModuleDialog module={module} onEdit={onEdit} />
 
       <div className="text-left pr-10">
         <h2 className="font-semibold leading-tight">
@@ -31,7 +35,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = ({
 
       <div
         className={cn(
-          "shrink-0 text-5xl font-bold tabular-nums pr-2",
+          "shrink-0 text-4xl font-bold tabular-nums pr-2",
           gradeColorMapping[module.grade],
         )}
       >
