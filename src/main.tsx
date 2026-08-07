@@ -7,6 +7,7 @@ import { DiplomaChoice } from "./DiplomaChoice";
 import { type Diploma } from "./DiplomaChoice/types.ts";
 import { DiplomaContextProvider } from "./DiplomaContextProvider.tsx";
 import { defaultDiploma } from "./DiplomaChoice/types.ts";
+import { runMigrations } from "./migrations.ts";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,8 @@ export const DiplomaContext = createContext<DiplomaContextValue>({
   diploma: defaultDiploma,
   setDiploma: () => {},
 });
+
+runMigrations();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
