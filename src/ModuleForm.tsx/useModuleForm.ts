@@ -3,14 +3,14 @@
 import type { Semester } from "../App";
 import { semesterItems } from "@/helpers/semesterItems";
 
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import type { IFormInput } from ".";
 import { useModuleItems } from "./useModuleItems";
 
 type UseModuleFormProps = {
   semesters: Semester[];
   setSemesters: (sem: Semester[]) => void;
-  defaultValues: IFormInput
+  defaultValues: IFormInput;
 };
 
 export const useModuleForm = ({
@@ -19,10 +19,10 @@ export const useModuleForm = ({
   defaultValues,
 }: UseModuleFormProps) => {
   const { handleSubmit, control, watch, reset } = useForm<IFormInput>({
-    defaultValues
+    defaultValues,
   });
 
-  const { moduleList } = useModuleItems()
+  const { moduleList } = useModuleItems();
 
   const isComplete = watch("grade") !== "" && watch("moduleId") !== "";
 
@@ -37,7 +37,7 @@ export const useModuleForm = ({
     }
 
     const selectedModule = moduleList.find((module) => module.id === moduleId);
-    console.log({selectedModule , moduleList})
+    console.log({ selectedModule, moduleList });
 
     const selectedSemester = semesterItems.find(
       (semester) => semester.value === semesterId,
@@ -65,7 +65,7 @@ export const useModuleForm = ({
       ];
     });
 
-    reset({ moduleId: "", grade: "", semesterId: 1 });
+    reset({ moduleId: "", grade: "", semesterId });
   };
 
   return { control, isComplete, handleSubmit: handleSubmit(onSubmit) };
